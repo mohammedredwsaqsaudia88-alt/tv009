@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StreamHub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -24,25 +24,29 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 60px;
+            padding: 18px 60px;
             background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
             z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
         .header.scrolled {
             background: rgba(0,0,0,0.98);
+            padding: 15px 60px;
         }
 
         .logo {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: #e50914;
-            letter-spacing: 1px;
+            font-size: 1.9em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e50914 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
         }
 
         .nav {
@@ -80,7 +84,8 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: #e50914;
+            background: linear-gradient(90deg, #e50914, #ff6b6b);
+            border-radius: 2px;
         }
 
         .adblocker-status {
@@ -89,6 +94,7 @@
             gap: 8px;
             padding: 6px 14px;
             background: rgba(76, 175, 80, 0.15);
+            border: 1px solid rgba(76, 175, 80, 0.3);
             border-radius: 20px;
             font-size: 0.85em;
             color: #4caf50;
@@ -101,7 +107,7 @@
         }
 
         .container {
-            padding: 120px 60px 60px;
+            padding: 110px 60px 60px;
             max-width: 2000px;
             margin: 0 auto;
         }
@@ -131,31 +137,33 @@
         }
 
         .row-title {
-            font-size: 1.6em;
+            font-size: 1.7em;
             margin-bottom: 25px;
             padding-left: 4px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
+            font-weight: 700;
+            letter-spacing: -0.8px;
         }
 
         .cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
+            gap: 20px;
         }
 
         .card {
             position: relative;
             cursor: pointer;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            border-radius: 6px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 8px;
             overflow: hidden;
             background: #0a0a0a;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         .card:hover {
-            transform: scale(1.08);
+            transform: scale(1.06) translateY(-8px);
             z-index: 10;
+            box-shadow: 0 12px 40px rgba(229, 9, 20, 0.4);
         }
 
         .card-image {
@@ -163,11 +171,12 @@
             height: 420px;
             object-fit: cover;
             display: block;
-            transition: opacity 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .card:hover .card-image {
-            opacity: 0.7;
+            opacity: 0.6;
+            transform: scale(1.05);
         }
 
         .card-overlay {
@@ -175,21 +184,22 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%);
-            padding: 30px 18px 18px;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
+            background: linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0) 100%);
+            padding: 35px 20px 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .card:hover .card-overlay {
-            transform: translateY(0);
+            opacity: 1;
         }
 
         .card-title {
-            font-size: 1.25em;
-            margin-bottom: 10px;
-            font-weight: 600;
-            letter-spacing: -0.3px;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
         }
 
         .card-meta {
@@ -204,44 +214,128 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            background: rgba(255, 215, 0, 0.15);
+            padding: 4px 10px;
+            border-radius: 15px;
             color: #ffd700;
-            font-weight: 600;
+            font-weight: 700;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
 
         .genre {
-            color: #808080;
-            font-weight: 500;
+            color: #999;
+            font-weight: 600;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 10px;
+            border-radius: 15px;
         }
 
         .card-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .btn {
-            padding: 10px 18px;
+            padding: 11px 20px;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 0.95em;
-            font-weight: 600;
-            transition: all 0.2s ease;
+            font-weight: 700;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 8px;
-            letter-spacing: 0.2px;
+            letter-spacing: 0.3px;
         }
 
         .btn-play {
-            background: #ffffff;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
             color: #000000;
             flex: 1;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
         }
 
         .btn-play:hover {
-            background: rgba(255,255,255,0.85);
+            background: linear-gradient(135deg, #e50914 0%, #ff6b6b 100%);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
         }
 
+        /* Video Player Modal */
+        .video-player-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.96);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .video-player-modal.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-player-header {
+            padding: 20px 40px;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .video-player-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .video-player-close {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 2em;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .video-player-close:hover {
+            background: #e50914;
+            transform: rotate(90deg);
+        }
+
+        .video-player-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .video-player-frame {
+            width: 100%;
+            max-width: 1600px;
+            height: calc(100vh - 120px);
+            border: none;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+        }
+
+        /* Series Modal */
         .modal {
             display: none;
             position: fixed;
@@ -249,11 +343,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.92);
+            background: rgba(0,0,0,0.94);
             z-index: 1000;
             padding: 60px;
             overflow-y: auto;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
 
         .modal.active {
@@ -264,47 +358,50 @@
         }
 
         .modal-content {
-            background: #0a0a0a;
-            border-radius: 8px;
-            max-width: 850px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #141414 100%);
+            border-radius: 12px;
+            max-width: 900px;
             width: 100%;
             position: relative;
             border: 1px solid #1a1a1a;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
 
         .modal-close {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             border: none;
             color: #ffffff;
             font-size: 1.8em;
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1;
-            transition: background 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .modal-close:hover {
-            background: rgba(0,0,0,0.9);
+            background: #e50914;
+            transform: rotate(90deg);
         }
 
         .modal-header {
             position: relative;
-            height: 400px;
+            height: 450px;
+            overflow: hidden;
         }
 
         .modal-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 8px 8px 0 0;
+            border-radius: 12px 12px 0 0;
         }
 
         .modal-gradient {
@@ -312,26 +409,26 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 200px;
+            height: 250px;
             background: linear-gradient(to top, #0a0a0a 0%, transparent 100%);
         }
 
         .modal-body {
-            padding: 30px 40px 40px;
+            padding: 35px 45px 45px;
         }
 
         .modal-title {
-            font-size: 1.9em;
-            margin-bottom: 15px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            font-size: 2.2em;
+            margin-bottom: 18px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .modal-meta {
             display: flex;
             gap: 20px;
-            margin-bottom: 25px;
-            font-size: 1.05em;
+            margin-bottom: 30px;
+            font-size: 1.1em;
         }
 
         .seasons-list {
@@ -340,42 +437,49 @@
 
         .season-block {
             margin-bottom: 25px;
-            background: #0f0f0f;
-            border-radius: 8px;
-            padding: 22px;
-            border: 1px solid #1a1a1a;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .season-block:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(229, 9, 20, 0.3);
         }
 
         .season-title {
-            font-size: 1.2em;
-            margin-bottom: 16px;
+            font-size: 1.3em;
+            margin-bottom: 18px;
             color: #ffffff;
-            font-weight: 600;
-            letter-spacing: -0.3px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .episodes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            gap: 10px;
+            gap: 12px;
         }
 
         .episode-btn {
-            padding: 12px;
-            background: #1a1a1a;
+            padding: 14px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
             border: 1px solid #2a2a2a;
             color: #ffffff;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9em;
-            transition: all 0.2s ease;
-            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            font-weight: 700;
         }
 
         .episode-btn:hover {
-            background: #e50914;
+            background: linear-gradient(135deg, #e50914 0%, #ff6b6b 100%);
             border-color: #e50914;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
         }
 
         .loading {
@@ -391,16 +495,16 @@
             padding: 100px 20px;
             color: #e50914;
             font-size: 1.2em;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .spinner {
             border: 3px solid #1a1a1a;
             border-top: 3px solid #e50914;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            animation: spin 0.9s linear infinite;
+            width: 50px;
+            height: 50px;
+            animation: spin 0.8s linear infinite;
             margin: 0 auto 20px;
         }
 
@@ -438,6 +542,9 @@
             }
             .header {
                 padding: 15px 30px;
+            }
+            .modal {
+                padding: 20px;
             }
         }
     </style>
@@ -480,6 +587,7 @@
         </div>
     </div>
 
+    <!-- Series Modal -->
     <div id="modal" class="modal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">×</button>
@@ -492,6 +600,17 @@
                 <div id="modal-meta" class="modal-meta"></div>
                 <div id="modal-seasons" class="seasons-list"></div>
             </div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="video-player-modal" class="video-player-modal">
+        <div class="video-player-header">
+            <div class="video-player-title" id="player-title">Now Playing</div>
+            <button class="video-player-close" onclick="closeVideoPlayer()">×</button>
+        </div>
+        <div class="video-player-container">
+            <iframe id="video-player-frame" class="video-player-frame" allowfullscreen allow="autoplay; fullscreen"></iframe>
         </div>
     </div>
 
@@ -514,8 +633,10 @@
             const observer = new MutationObserver(() => {
                 adSelectors.forEach(selector => {
                     document.querySelectorAll(selector).forEach(el => {
-                        el.classList.add('blocked-ad');
-                        el.remove();
+                        if (!el.id || el.id !== 'video-player-frame') {
+                            el.classList.add('blocked-ad');
+                            el.remove();
+                        }
                     });
                 });
             });
@@ -523,13 +644,6 @@
             observer.observe(document.body, {
                 childList: true,
                 subtree: true
-            });
-
-            adSelectors.forEach(selector => {
-                document.querySelectorAll(selector).forEach(el => {
-                    el.classList.add('blocked-ad');
-                    el.remove();
-                });
             });
         }
 
@@ -563,7 +677,7 @@
                 card.className = 'card';
                 card.innerHTML = `
                     <img src="${movie.image}" alt="${movie.title}" class="card-image" 
-                         onerror="this.src='https://via.placeholder.com/280x420/000000/ffffff?text=${encodeURIComponent(movie.title)}'">
+                         onerror="this.src='https://via.placeholder.com/280x420/0a0a0a/e50914?text=${encodeURIComponent(movie.title)}'">
                     <div class="card-overlay">
                         <h3 class="card-title">${movie.title}</h3>
                         <div class="card-meta">
@@ -571,8 +685,8 @@
                             <span class="genre">${movie.genre}</span>
                         </div>
                         <div class="card-actions">
-                            <button class="btn btn-play" onclick="playContent('${movie.url}')">
-                                ▶ Play
+                            <button class="btn btn-play" onclick="playContent('${movie.url}', '${movie.title}')">
+                                ▶ Play Now
                             </button>
                         </div>
                     </div>
@@ -590,7 +704,7 @@
                 card.className = 'card';
                 card.innerHTML = `
                     <img src="${series.image}" alt="${series.title}" class="card-image"
-                         onerror="this.src='https://via.placeholder.com/280x420/000000/ffffff?text=${encodeURIComponent(series.title)}'">
+                         onerror="this.src='https://via.placeholder.com/280x420/0a0a0a/e50914?text=${encodeURIComponent(series.title)}'">
                     <div class="card-overlay">
                         <h3 class="card-title">${series.title}</h3>
                         <div class="card-meta">
@@ -622,7 +736,7 @@
                     <div class="season-title">Season ${season.season}</div>
                     <div class="episodes-grid">
                         ${season.episodes.map(ep => `
-                            <button class="episode-btn" onclick="playContent('${ep.url}')">
+                            <button class="episode-btn" onclick="playContent('${ep.url}', '${series.title} - S${season.season}E${ep.episode}')">
                                 Ep ${ep.episode}
                             </button>
                         `).join('')}
@@ -642,8 +756,27 @@
             }
         }
 
-        function playContent(url) {
-            window.open(url, '_blank');
+        function playContent(url, title) {
+            const videoModal = document.getElementById('video-player-modal');
+            const videoFrame = document.getElementById('video-player-frame');
+            const playerTitle = document.getElementById('player-title');
+            
+            playerTitle.textContent = title;
+            videoFrame.src = url;
+            videoModal.classList.add('active');
+            
+            // Close series modal if open
+            closeModal();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoPlayer() {
+            const videoModal = document.getElementById('video-player-modal');
+            const videoFrame = document.getElementById('video-player-frame');
+            
+            videoFrame.src = '';
+            videoModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
         async function loadData() {
@@ -677,6 +810,7 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeModal();
+                closeVideoPlayer();
             }
         });
 
